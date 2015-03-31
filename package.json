@@ -1,0 +1,28 @@
+{
+  "name": "ng-crud",
+  "version": "1.0.0",
+  "description": "CRUD with Angular and MongoDB",
+  "scripts": {
+    "start": "node svr/svr",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "make": "node node_modules/coffee-script/bin/coffee make.coffee",
+    "mongo": "..\\..\\mongodb-3.0.1\\bin\\mongod --dbpath ..\\..\\mongodb-3.0.1\\data"
+  },
+  "keywords": [
+    "angular",
+    "crud",
+    "mongodb"
+  ],
+  "author": "Luis Crespo",
+  "license": "ISC",
+  "devDependencies": {
+    "coffee-script": "^1.9.1"
+  },
+  "dependencies": {
+    "body-parser": "^1.12.2",
+    "connect": "^3.3.5",
+    "mongodb": "^2.0.25",
+    "serve-static": "^1.9.2",
+    "underscore": "^1.8.2"
+  }
+}
