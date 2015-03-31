@@ -1,3 +1,5 @@
+chalk = require('chalk')
+
 taskInfo = null
 
 serialize = (taskList) ->
@@ -17,14 +19,14 @@ serialize = (taskList) ->
 taskControl = {
 	fail: (msg) ->
 		@failCB(msg)
-		throw(msg)
+		throw('Make failed')
 	success: (msg, nocb) ->
-		console.log(msg)
+		console.log(chalk.green.bold(msg))
 		@successCB(msg) unless nocb
 	log: (msg) -> console.log('  ' + msg)
-	warn: (msg) -> console.warn(msg)
-	start: (task) -> console.log("--- Running task '#{task}' ---")
-	failCB: (msg) ->
+	warn: (msg) -> console.warn(chalk.yellow(msg))
+	start: (task) -> console.log(chalk.cyan.bold("--- Running task '#{task}' ---"))
+	failCB: (msg) -> console.error(chalk.red.bold(msg))
 	successCB: (msg) ->
 }
 

@@ -16,7 +16,7 @@ doCoffee = (ctrl) ->
 	exec(cmd, (err, stdout, stderr) ->
 		ctrl.log(stdout + stderr) if stdout.length > 0 || stderr.length > 0
 		if err then ctrl.fail(err)
-		ctrl.success('  Coffe compile OK')
+		ctrl.success('Coffe compile OK')
 	)
 
 

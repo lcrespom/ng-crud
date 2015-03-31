@@ -16,10 +16,11 @@
   "author": "Luis Crespo",
   "license": "ISC",
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/lcrespom/ng-crud.git"
+    "type": "git",
+    "url": "https://github.com/lcrespom/ng-crud.git"
   },
   "devDependencies": {
+    "chalk": "^1.0.0",
     "coffee-script": "^1.9.1"
   },
   "dependencies": {

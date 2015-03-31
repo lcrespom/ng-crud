@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Mongo DB JSON Test</title>
+	<style>
+		body {
+			font-family: sans-serif;
+		}
+		.jsonbox {
+			display: inline-block;
+			vertical-align: top;
+			width: 40%;
+			margin: 4%;
+		}
+		label {
+			display: inline-block;
+			line-height: 4ex;
+			width: 10ex;
+		}
+	</style>
+	<script src="lib/jquery-2.1.3.min.js"></script>
+</head>
+
+<body>
+	<div class="jsonbox">
+		<h3>Request</h3>
+		<label>Method:</label>
+		<select id="method">
+			<option selected>GET</option>
+			<option>PUT</option>
+			<option>POST</option>
+			<option>DELETE</option>
+		</select><br>
+		<label>Collection:</label> <input id="collection"><br>
+		<label>JSON data:</label><br>
+		<textarea style="width:100%" id="data" rows="15"></textarea><br>
+		<button id="doTest">Test</button>
+	</div>
+	<div class="jsonbox">
+		<h3>JSON response</h3>
+		<textarea style="width:100%" id="output" rows="22"></textarea>
+	</div>
+
+
+	<script>
+		(function() {
+			function ajax(collection, method, data) {
+				var deferred = $.Deferred();
+				$.ajax({
+					method: method,
+					url: '/data/' + collection,
+					data: data
+				}).done(function(result) {
+					if (result.err) deferred.reject(result.err);
+					else deferred.resolve(result);
+				}).fail(function(result) {
+					deferred.reject(result);
+				});
+				return deferred.promise();
+			}
+
+			$('#doTest').click(function() {
+				var collection = $('#collection').val();
+				var method = $('#method').val();
+				var data = $('#data').val();
+				if (!data.trim()) data = null;
+				else {
+					try {
+						data = JSON.parse(data);
+					}
+					catch (err) {
+						alert("Error: invalid JSON");
+						return;
+					}
+				}
+				ajax(collection, method, data)
+				.done(function(result) {
+					$('#output').val(JSON.stringify(result));
+				})
+				.fail(function(err) {
+					$('#output').val('ERROR: ' + JSON.stringify(err));
+				});
+			});
+		})();
+	</script>
+
+</body>
+</html>

@@ -16,7 +16,7 @@ data.dbConfig = url: 'mongodb://localhost/test'
 svrConfig =
 	port: 1337
 	host: 'localhost'
-	rootDir: '../web'
+	rootDir: 'web'
 
 # Server setup
 launchServer = ->
