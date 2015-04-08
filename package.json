@@ -6,7 +6,8 @@
     "start": "node svr/svr",
     "test": "echo \"Error: no test specified\" && exit 1",
     "make": "node node_modules/coffee-script/bin/coffee make.coffee",
-    "mongo": "..\\..\\mongodb-3.0.1\\bin\\mongod --dbpath ..\\..\\mongodb-3.0.1\\data"
+    "mongo": "..\\..\\mongodb-3.0.1\\bin\\mongod --dbpath ..\\..\\mongodb-3.0.1\\data",
+    "mongo-mac": "~/devtools/mongodb/bin/mongod --dbpath ~/devtools/mongodb/data"
   },
   "keywords": [
     "angular",
