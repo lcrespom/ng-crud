@@ -13,12 +13,21 @@
 		.sidebar-nav {
 			padding: 9px 0;
 		}
-		.crud-view {
-			padding: 10px 20px;
-			background-color: #f5f5f5;
-			border: 1px solid #e3e3e3;
-			border-radius: 6px;
-		}
+    .nav-header {
+      cursor: default;
+      display: block;
+      margin-top: 9px;
+      padding: 3px 15px;
+      font-size: 11px;
+      font-weight: bold;
+      line-height: 20px;
+      color: #999;
+      text-transform: uppercase;
+    }
+    .nav-list>.active>a, .nav-list>.active>a:hover , .nav-list>.active>a:focus {
+      background-color: #08c;
+      color: #fff;
+    }
     </style>
 
     <!-- Libs -->
@@ -33,9 +42,9 @@
 <body>
 
     <div class="container-fluid">
-      <div class="row-fluid">
+      <div class="row">
 
-        <div class="span3">
+        <div class="col-sm-3">
           <div class="well sidebar-nav">
             <ul class="nav nav-list">
               <li><a href="#" onclick="location.reload(true)">Home</a></li>
@@ -47,23 +56,21 @@
           </div><!--/.well -->
         </div><!--/span-->
 
-        <div class="span9">
-          <div class="crud-view" ng-view></div>
+        <div class="col-sm-9">
+          <div class="well crud-view" ng-view></div>
         </div><!--/span-->
 
       </div><!--/row-fluid-->
     </div>
 
       <script>
-      	(function() {
-
-			// Look & feel so that current menu option is active
-      		$('.nav-list li').click(function() {
-      			$('li', this.parentElement).removeClass('active');
-      			$(this).addClass('active');
-      		});
-
-		})();
+        (function() {
+          // Look & feel so that current menu option is active
+          $('.nav-list li').click(function() {
+          	$(this.parentElement).find('.active').removeClass('active');
+          	$(this).addClass('active');
+          });
+        })();
       </script>
 
 </body>

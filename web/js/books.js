@@ -10,7 +10,8 @@
 		})
 		.when('/users', {
 			templateUrl: 'views/users.html',
-			controller: 'CrudCtrl'
+			controller: 'CrudCtrl',
+			collection: 'users'
 		})
 		.when('/combos', {
 			templateUrl: 'views/combos.html',
@@ -20,8 +21,10 @@
 			redirectTo: '/'
 		});
 	}])
-	.controller('CrudCtrl', ['$scope', '$http', '$route', function ($scope, $http, $route) {
-		$scope.items = [{a: 1, b: 2}, {a: 3, b: 4}];
-		console.log(location.hash);
+	.controller('CrudCtrl', ['$scope', '$http', '$route', function($scope, $http, $route) {
+		var collection = $route.current.collection || $route.current.originalPath.substr(1);
+		$http.get('/data/' + collection).success(function(data) {
+			$scope.items = data.items;
+		});
 	}]);
 })();
