@@ -33,9 +33,11 @@
 		console.log('Collection:', collection, ' -  Action:', action);
 		switch (action) {
 			case 'create':
+				$scope.item = {};
 				break;
 			case 'read':
-				$http.get('/data/' + collection).success(function(data) {
+				$http.get('/data/' + collection)
+				.success(function(data) {
 					$scope.$parent.items = data.items;
 				});
 				break;
@@ -47,6 +49,17 @@
 			default:
 				throw new Error('Invalid action: ' + action);
 		}
+
+		$scope.doUpdate = function() {
+			$http.put('/data/' + collection, $scope.item)
+			.success(function(data) {
+				console.log('PUT OK: ', data);
+			})
+			.error(function(data, status, headers, config) {
+				console.error('PUT Error: ', data, status, headers, config);
+			});
+		};
+
 	}]);
 
 })();

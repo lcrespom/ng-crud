@@ -5,6 +5,11 @@ ToDo
 ====
 
 - Web
+  - CRUD
+    - Create
+    - ~~Read~~
+  	- Update
+  	- Delete
   - Form validation
   - Angular components for most common web elements
     - Form inputs
