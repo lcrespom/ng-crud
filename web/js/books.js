@@ -7,8 +7,7 @@
 	.config(['$routeProvider', function($routeProvider) {
 		$routeProvider
 		.when('/', {
-			templateUrl: 'views/welcome.html',
-			controller: 'CrudCtrl'
+			templateUrl: 'views/welcome.html'
 		})
 		.when('/users', {
 			templateUrl: 'views/users.html',
@@ -27,7 +26,7 @@
 		});
 	}])
 
-	.controller('CrudCtrl', ['$scope', '$rootScope', '$http', '$route', function($scope, $rootScope, $http, $route) {
+	.controller('CrudCtrl', ['$scope', '$http', '$route', function($scope, $http, $route) {
 		var paths = $route.current.originalPath.split('/');
 		var collection = $route.current.collection || paths[1];
 		var action = $route.current.action || paths[2] || 'read';
@@ -37,11 +36,11 @@
 				break;
 			case 'read':
 				$http.get('/data/' + collection).success(function(data) {
-					$rootScope.items = data.items;
+					$scope.$parent.items = data.items;
 				});
 				break;
 			case 'update':
-				$scope.item = $rootScope.items[$route.current.params.id];
+				$scope.item = $scope.$parent.items[$route.current.params.id];
 				break;
 			case 'delete':
 				break;
