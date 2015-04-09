@@ -27,7 +27,7 @@
 		});
 	}])
 
-	.controller('CrudCtrl', ['$scope', '$http', '$route', function($scope, $http, $route) {
+	.controller('CrudCtrl', ['$scope', '$rootScope', '$http', '$route', function($scope, $rootScope, $http, $route) {
 		var paths = $route.current.originalPath.split('/');
 		var collection = $route.current.collection || paths[1];
 		var action = $route.current.action || paths[2] || 'read';
@@ -37,11 +37,11 @@
 				break;
 			case 'read':
 				$http.get('/data/' + collection).success(function(data) {
-					$scope.items = data.items;
+					$rootScope.items = data.items;
 				});
 				break;
 			case 'update':
-				console.log('should get item with id =', $route.current.params.id);
+				$scope.item = $rootScope.items[$route.current.params.id];
 				break;
 			case 'delete':
 				break;
