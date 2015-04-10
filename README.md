@@ -22,9 +22,12 @@ ToDo
   - CRUD
     - Create
     - ~~Read~~
-  	- Update
+  	- ~~Update~~
   	- Delete
   - Form validation
+  - Improve feedback to user
+    - Show 'loading...' when performing AJAX
+    - Show error message upon AJAX error response
   - Angular components for most common web elements
     - Form inputs
     - Form buttons

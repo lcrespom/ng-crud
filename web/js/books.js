@@ -26,7 +26,8 @@
 		});
 	}])
 
-	.controller('CrudCtrl', ['$scope', '$http', '$route', function($scope, $http, $route) {
+	.controller('CrudCtrl', ['$scope', '$http', '$route', '$location',
+		function($scope, $http, $route, $location) {
 		var paths = $route.current.originalPath.split('/');
 		var collection = $route.current.collection || paths[1];
 		var action = $route.current.action || paths[2] || 'read';
@@ -54,8 +55,10 @@
 			$http.put('/data/' + collection, $scope.item)
 			.success(function(data) {
 				console.log('PUT OK: ', data);
+				$location.path(collection);
 			})
 			.error(function(data, status, headers, config) {
+				//TODO report error to end user
 				console.error('PUT Error: ', data, status, headers, config);
 			});
 		};
