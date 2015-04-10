@@ -1,8 +1,22 @@
-# ng-crud
+ng-crud
+=======
 Angular-based CRUD
 
+Ingredients:
+------------
+- Server
+  - node.js
+  - Connect as server engine
+  - CoffeeScript as programming language
+  - MongoDB as database
+- Client
+  - Angular
+  - jQuery
+  - Bootstrap
+
+
 ToDo
-====
+----
 
 - Web
   - CRUD
