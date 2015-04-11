@@ -20,7 +20,7 @@ ToDo
 
 - Web
   - CRUD
-    - Create
+    - ~~Create~~
     - ~~Read~~
   	- ~~Update~~
   	- Delete
