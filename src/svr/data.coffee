@@ -32,7 +32,7 @@ dataHandler = (req, res, next) ->
 		when 'GET'		then doGet(req, res, next, collection, parsedUrl, oid)
 		when 'POST'		then doPost(req, res, next, collection)
 		when 'PUT'		then doPut(req, res, next, collection)
-		when 'DELETE'	then doDelete(req, res, next, collection)
+		when 'DELETE'	then doDelete(req, res, next, collection, oid)
 		else next("Method '#{req.method}' not supported")
 
 doGet = (req, res, next, collection, parsedUrl, oid) ->
@@ -62,8 +62,9 @@ doPut = (req, res, next, collection) ->
 	collection.update({ _id: ObjectID(oid) }, req.body, { w: 1 }, (err, result) ->
 		respondJson(res, { err: err, result: result }))
 
-doDelete = (req, res, next, collection) ->
-	collection.remove({ _id: ObjectID(req.body._id) }, { w: 1 }, (err, numRemoved) ->
+doDelete = (req, res, next, collection, oid) ->
+	oid = oid || req.body._id;
+	collection.remove({ _id: ObjectID(oid) }, { w: 1 }, (err, numRemoved) ->
 		respondJson(res, { err: err, result: numRemoved }))
 
 respondJson = (res, obj) ->

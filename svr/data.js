@@ -44,7 +44,7 @@
       case 'PUT':
         return doPut(req, res, next, collection);
       case 'DELETE':
-        return doDelete(req, res, next, collection);
+        return doDelete(req, res, next, collection, oid);
       default:
         return next("Method '" + req.method + "' not supported");
     }
@@ -106,9 +106,10 @@
     });
   };
 
-  doDelete = function(req, res, next, collection) {
+  doDelete = function(req, res, next, collection, oid) {
+    oid = oid || req.body._id;
     return collection.remove({
-      _id: ObjectID(req.body._id)
+      _id: ObjectID(oid)
     }, {
       w: 1
     }, function(err, numRemoved) {

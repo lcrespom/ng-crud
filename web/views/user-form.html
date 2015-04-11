@@ -6,7 +6,7 @@
 	<div class="form-group">
 		<label for="input-name" class="col-sm-2 control-label">Name</label>
 		<div class="col-sm-10">
-			<input ng-model="item.name" type="text" class="form-control" id="input-name" placeholder="Name">
+			<input autofocus ng-model="item.name" type="text" class="form-control" id="input-name" placeholder="Name">
 		</div>
 	</div>
 	<div class="form-group">
@@ -31,3 +31,8 @@
 		</div>
 	</div>
 </form>
+
+<script>
+	// HTML5 autofocus only works once in a SPA
+	$('[autofocus]').focus();
+</script>

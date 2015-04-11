@@ -17,13 +17,12 @@ Ingredients:
 
 ToDo
 ----
-
 - Web
-  - CRUD
+  - ~~CRUD~~
     - ~~Create~~
     - ~~Read~~
   	- ~~Update~~
-  	- Delete
+  	- ~~Delete~~
   - Form validation
   - Improve feedback to user
     - Show 'loading...' when performing AJAX

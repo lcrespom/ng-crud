@@ -49,15 +49,13 @@
 			case 'update':
 				$scope.item = $scope.$parent.items[$route.current.params.id];
 				break;
-			case 'delete':
-				break;
 			default:
 				throw new Error('Invalid action: ' + $scope.action);
 		}
 
-		$scope.doSubmit = function() {
-			var verb = $scope.action == 'create' ? 'post' : 'put';
-			$http[verb]('/data/' + collection, $scope.item)
+		function httpAction(verb, item, extraPath) {
+			extraPath = extraPath || '';
+			return $http[verb]('/data/' + collection + extraPath, item)
 			.success(function(data) {
 				console.log(verb.toUpperCase() + ' OK: ', data);
 				$location.path(collection);
@@ -66,6 +64,25 @@
 				//TODO report error to end user
 				console.error(verb.toUpperCase() + ' Error: ', data, status, headers, config);
 			});
+		}
+
+		$scope.doSubmit = function() {
+			var verb = $scope.action == 'create' ? 'post' : 'put';
+			httpAction(verb, $scope.item);
+		};
+
+		$scope.doDelete = function(modalId) {
+			$('#' + modalId).on('hidden.bs.modal', function() {
+				console.log('Deleting ', $scope.toDelete);
+				httpAction('delete', undefined, '/' + $scope.toDelete._id)
+				.success(function() {
+					$route.reload();
+				});
+			});
+		};
+
+		$scope.prepareDelete = function(idx) {
+			$scope.toDelete = $scope.$parent.items[idx];
 		};
 
 	}]);
