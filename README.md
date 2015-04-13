@@ -17,7 +17,6 @@ Ingredients:
 
 ToDo
 ----
-
 - Browser
   - ~~CRUD~~
     - ~~Create~~
@@ -41,7 +40,6 @@ ToDo
     - Table action buttons
   - Filters
     - ~~Singularize (to name a single item in collection)~~
-
 - Server
   - Access control
     - Only allow access to specified collections, reject unspecified collections
