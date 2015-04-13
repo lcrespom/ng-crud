@@ -17,7 +17,8 @@ Ingredients:
 
 ToDo
 ----
-- Web
+
+- Browser
   - ~~CRUD~~
     - ~~Create~~
     - ~~Read~~
@@ -40,3 +41,12 @@ ToDo
     - Table action buttons
   - Filters
     - ~~Singularize (to name a single item in collection)~~
+
+- Server
+  - Access control
+    - Only allow access to specified collections, reject unspecified collections
+    - Only allow access to specified properties in collections
+    - Use JSON schema
+      - To reject invalid properties in request
+      - To filter unspecified properties in response
+      - To validate input data
