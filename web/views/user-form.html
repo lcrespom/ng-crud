@@ -3,24 +3,9 @@
 </h2>
 
 <form class="form-horizontal">
-	<div class="form-group">
-		<label for="input-name" class="col-sm-2 control-label">Name</label>
-		<div class="col-sm-10">
-			<input autofocus ng-model="item.name" type="text" class="form-control" id="input-name" placeholder="Name">
-		</div>
-	</div>
-	<div class="form-group">
-		<label for="input-surname" class="col-sm-2 control-label">Surname</label>
-		<div class="col-sm-10">
-			<input ng-model="item.surname" type="text" class="form-control" id="input-surname" placeholder="Surname">
-		</div>
-	</div>
-	<div class="form-group">
-		<label for="input-email" class="col-sm-2 control-label">e-mail</label>
-		<div class="col-sm-10">
-			<input ng-model="item.email" type="email" class="form-control" id="input-email" placeholder="e-mail">
-		</div>
-	</div>
+	<form-input id="input-name" label="Name" placeholder="Name" model="item.name" type="text" autofocus></form-input>
+	<form-input id="input-surname" label="Surname" placeholder="Surname" model="item.surname" type="text"></form-input>
+	<form-input id="input-email" label="e-mail" placeholder="e-mail" model="item.email" type="email"></form-input>
 	<div class="form-group">
 		<div class="col-sm-12 text-center">
 			<button type="button" class="btn btn-primary" ng-click="doSubmit()">
@@ -34,5 +19,5 @@
 
 <script>
 	// HTML5 autofocus only works once in a SPA
-	$('[autofocus]').focus();
+	$(function() { $('[autofocus]').focus(); });
 </script>
