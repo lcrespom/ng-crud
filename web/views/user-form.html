@@ -1,10 +1,13 @@
 <h2 style="margin-top: 0px; margin-bottom: 20px">
-	{{ action == 'create' ? 'New' : 'Update' }} {{ collection }} (ToDo: singular filter)
+	{{ action == 'create' ? 'New' : 'Update' }} {{ collection | singular }}
 </h2>
 
 <form class="form-horizontal">
-	<form-input id="input-name" label="Name" placeholder="Name" model="item.name" type="text" autofocus></form-input>
-	<form-input id="input-surname" label="Surname" placeholder="Surname" model="item.surname" type="text"></form-input>
-	<form-input id="input-email" label="e-mail" placeholder="e-mail" model="item.email" type="email"></form-input>
+	<form-input id="input-name" label="Name" placeholder="Name"
+		model="item.name" type="text" autofocus></form-input>
+	<form-input id="input-surname" label="Surname" placeholder="Surname"
+		model="item.surname" type="text"></form-input>
+	<form-input id="input-email" label="e-mail" placeholder="e-mail"
+		model="item.email" type="email"></form-input>
 	<form-create-update-buttons></form-create-update-buttons>
 </form>

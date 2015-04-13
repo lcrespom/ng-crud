@@ -2,6 +2,8 @@
 
 	angular.module('crud', ['ngRoute'])
 
+	//------------------------- Controller -------------------------
+
 	.controller('CrudCtrl', ['$scope', '$http', '$route', '$location',
 		function($scope, $http, $route, $location) {
 		var paths = $route.current.originalPath.split('/');
@@ -105,6 +107,31 @@
 					'</div>' +
 				'</div>'
 		};
-	});
+	})
+
+
+	//------------------------- Filters -------------------------
+
+	.filter('singular', function() {
+		return singularize;
+	})
+
+
+	//------------------------- Privates -------------------------
+	;
+
+	function singularize(plural) {
+		plural = plural.toLowerCase();
+		if (plural[plural.length - 1] == 's')
+			return plural.substr(0, plural.length - 1);
+		// TODO: complete with most common irregular plurals
+		var irregulars = {
+			mice: 'mouse', teeth: 'tooth'
+		}
+		var singular = irregulars[plural];
+		if (!singular)
+			console.warn('Warning: singular of "', plural, '" not found');
+		return singular ? singular : plural;
+	}
 
 })();
