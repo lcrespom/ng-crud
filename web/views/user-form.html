@@ -1,23 +1,10 @@
 <h2 style="margin-top: 0px; margin-bottom: 20px">
-	{{ action == 'create' ? 'New' : 'Update' }} user
+	{{ action == 'create' ? 'New' : 'Update' }} {{ collection }} (ToDo: singular filter)
 </h2>
 
 <form class="form-horizontal">
 	<form-input id="input-name" label="Name" placeholder="Name" model="item.name" type="text" autofocus></form-input>
 	<form-input id="input-surname" label="Surname" placeholder="Surname" model="item.surname" type="text"></form-input>
 	<form-input id="input-email" label="e-mail" placeholder="e-mail" model="item.email" type="email"></form-input>
-	<div class="form-group">
-		<div class="col-sm-12 text-center">
-			<button type="button" class="btn btn-primary" ng-click="doSubmit()">
-				{{ action == 'create' ? 'Create' : 'Update' }}
-			</button>
-			&nbsp;
-			<a href="#/users" class="btn btn-default">Cancel</a>
-		</div>
-	</div>
+	<form-create-update-buttons></form-create-update-buttons>
 </form>
-
-<script>
-	// HTML5 autofocus only works once in a SPA
-	$(function() { $('[autofocus]').focus(); });
-</script>

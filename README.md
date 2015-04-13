@@ -29,5 +29,14 @@ ToDo
     - Show error message upon AJAX error response
   - Angular components for most common web elements
     - Form inputs
+      - ~~Input~~
+      - Select
+      - Checkbox
+      - Textarea
+      - Etc (radio...)
     - Form buttons
+      - ~~Create / Update~~
+      - others?
     - Table action buttons
+  - Filters
+    - Singularize (to name a single item in collection)
