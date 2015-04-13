@@ -39,4 +39,4 @@ ToDo
       - others?
     - Table action buttons
   - Filters
-    - Singularize (to name a single item in collection)
+    - ~~Singularize (to name a single item in collection)~~
