@@ -150,7 +150,10 @@
 			var field = fields[name];
 			if (field.label === undefined) field.label = ucFirst(name);
 			if (field.colLabel === undefined) field.colLabel = field.label;
+			if (!field.cellRender) field.cellRender = identity;
 		}
+
+		function identity(x) { return x }
 
 		function ucFirst(str) {
 		    return str.charAt(0).toUpperCase() + str.substr(1);

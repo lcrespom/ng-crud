@@ -1,7 +1,7 @@
 (function() {
 
 	angular.module('books', [
-		'ngRoute', 'crud'
+		'ngRoute', 'ngSanitize', 'crud'
 	])
 
 	.config(['$routeProvider', function($routeProvider) {
@@ -52,12 +52,17 @@
 					// placeholder: 'defaults to no placeholder displayed'
 					// colLabel: 'deafults to label'
 					// cellStyle: 'a CSS object as expected by ng-style'
+					// cellRender: 'a function that will render cell content - default to identity'
 				},
 				surname: {
 					label: 'Last name'
 				},
 				email: {
-					label: 'e-mail'
+					label: 'e-mail',
+					cellRender: function(email) {
+						if (!email) return '';
+						return '<a href="mailto:' + email + '" target="_blank">' + email + '</a>';
+					}
 				}
 			}
 			// fieldOrder: 'defaults to Object.keys(fields)'

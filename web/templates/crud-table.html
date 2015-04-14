@@ -23,8 +23,8 @@
 				</button>
 			</td>
 			<!-- Rest of columns -->
-			<td ng-repeat="field in collInfo.fieldOrder" ng-style="collInfo.fields[field].cellStyle">
-				{{ item[field] }}
+			<td ng-repeat="field in collInfo.fieldOrder" ng-style="collInfo.fields[field].cellStyle"
+				ng-bind-html="collInfo.fields[field].cellRender(item[field])"></td>
 			</td>
 		</tr>
 	</tbody>
