@@ -34,12 +34,15 @@ ToDo
       - Checkbox
       - Textarea
       - Etc (radio...)
+      - **Generic support for crudInput directives**
     - Form buttons
       - ~~Create / Update~~
       - others?
     - ~~CRUD table~~
   - Filters
     - ~~Singularize (to name a single item in collection)~~
+  - IE bugs
+    - Browser cache is being used when sending JSON requests
 - Server
   - Access control
     - Only allow access to specified collections, reject unspecified collections

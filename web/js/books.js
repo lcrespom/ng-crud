@@ -14,11 +14,11 @@
 			controller: 'CrudCtrl'
 		})
 		.when('/users/create', {
-			templateUrl: 'views/user-form.html',
+			templateUrl: 'templates/crud-form-view.html',
 			controller: 'CrudCtrl'
 		})
 		.when('/users/update/:id', {
-			templateUrl: 'views/user-form.html',
+			templateUrl: 'templates/crud-form-view.html',
 			controller: 'CrudCtrl'
 		})
 		.when('/combos', {
@@ -53,21 +53,27 @@
 					// colLabel: 'deafults to label'
 					// cellStyle: 'a CSS object as expected by ng-style'
 					// cellRender: 'a function that will render cell content - default to identity'
+					//TODO inputType: 'name of directive to use as form input - default to crud-input'
+					// inputAttrs: object with extra attributes for input directive,
+					//		e.g. { type: 'email' }
 				},
 				surname: {
 					label: 'Last name'
 				},
 				email: {
 					label: 'e-mail',
+					placeholder: 'a vaild e-mail address',
 					cellRender: function(email) {
 						if (!email) return '';
 						return '<a href="mailto:' + email + '" target="_blank">' + email + '</a>';
-					}
+					},
+					inputAttrs: { type: 'email' }
 				}
 			}
 			// fieldOrder: 'defaults to Object.keys(fields)'
 			//TODO tableActions: {}
 			//TODO tableActionsPosition: left/right
+			//TODO focusField: 'name of field to set focus, defaults to first according to fieldOrder'
 		}
 	}
 

@@ -8,6 +8,7 @@
 		function($scope, $http, $route, $location) {
 		var paths = $route.current.originalPath.split('/');
 		$scope.collection = $route.current.collection || paths[1];
+		$scope.collInfo = $scope.crud[$scope.collection];
 		$scope.action = $route.current.action || paths[2] || 'read';
 		console.log('Collection:', $scope.collection, ' -  Action:', $scope.action);
 		switch ($scope.action) {
@@ -76,7 +77,7 @@
 			},
 			link: function(scope, element, attrs) {
 				// Set focus if autofocus attribute is present
-				if (attrs.hasOwnProperty('autofocus'))
+				if (attrs.hasOwnProperty('autofocus') && attrs.autofocus != 'false')
 					element.find('input').focus();
 				// Copy all extra attributes into the input element
 				for (var prop in attrs)
@@ -112,9 +113,6 @@
 	.directive('crudTable', function() {
 		return {
 			restrict: 'E',
-			link: function(scope, element, attrs) {
-				scope.collInfo = scope.crud[scope.collection];
-			},
 			templateUrl: 'templates/crud-table.html'
 		};
 	})
