@@ -109,7 +109,6 @@
 		};
 	})
 
-
 	.directive('crudTable', function() {
 		return {
 			restrict: 'E',
@@ -120,11 +119,43 @@
 		};
 	})
 
+
 	//------------------------- Filters -------------------------
 
 	.filter('singular', function() {
 		return singularize;
 	})
+
+
+	//------------------------- Services -------------------------
+
+	.factory('crudHelper', [function() {
+		return {
+			completeMetadataDefaults: completeMetadataDefaults
+		}
+
+		function completeMetadataDefaults(metadata) {
+			for (var collName in metadata)
+				if (metadata.hasOwnProperty(collName)) {
+					var collMeta = metadata[collName];
+					if (!collMeta.fieldOrder)
+						collMeta.fieldOrder = Object.keys(collMeta.fields);
+					for (var i = 0; i < collMeta.fieldOrder.length; i++) {
+						completeFieldDefaults(collMeta.fields, collMeta.fieldOrder[i]);
+					}
+				}
+		}
+
+		function completeFieldDefaults(fields, name) {
+			var field = fields[name];
+			if (field.label === undefined) field.label = ucFirst(name);
+			if (field.colLabel === undefined) field.colLabel = field.label;
+		}
+
+		function ucFirst(str) {
+		    return str.charAt(0).toUpperCase() + str.substr(1);
+		}
+	}])
 
 
 	//------------------------- Privates -------------------------
