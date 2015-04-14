@@ -28,6 +28,36 @@
 		.otherwise({
 			redirectTo: '/'
 		});
-	}]);
+	}])
+
+	.controller('appCtrl', ['$scope', function($scope) {
+		$scope.crud = collectionMetadata;
+	}])
+
+	;
+
+	//------------------------- Collection metadata -------------------------
+
+	var collectionMetadata = {
+		users: {
+			// itemName: 'name of an item, defaults to singular of collection from location'
+			// tableName: 'name of table, defaults to collection from location'
+			fields: {
+				name: {
+					// label: 'Defaults to property name with ucFirst'
+					// placeholder: 'defaults to no placeholder displayed'
+					// colLabel: 'deafults to label'
+					// colWidth: 'in css units'
+				},
+				surname: 0,	// Only specified fields will be displayed
+				email: {
+					label: 'e-mail'
+				}
+			}
+			// fieldOrder: 'defaults to Object.keys(fields)'
+			// tableActions: {}
+			// tableActionsPosition: left/right
+		}
+	}
 
 })();

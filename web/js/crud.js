@@ -63,7 +63,7 @@
 
 	//------------------------- Directives -------------------------
 
-	.directive('formInput', function() {
+	.directive('crudInput', function() {
 		return {
 			restrict: 'E',
 			scope: {
@@ -93,7 +93,7 @@
 		};
 	})
 
-	.directive('formCreateUpdateButtons', function() {
+	.directive('crudFormButtons', function() {
 		return {
 			restrict: 'E',
 			template:
@@ -109,6 +109,13 @@
 		};
 	})
 
+
+	.directive('crudTable', function() {
+		return {
+			restrict: 'E',
+			templateUrl: 'templates/crud-table.html'
+		};
+	})
 
 	//------------------------- Filters -------------------------
 
