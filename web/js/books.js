@@ -10,7 +10,7 @@
 			templateUrl: 'views/welcome.html'
 		})
 		.when('/users', {
-			templateUrl: 'views/user-table.html',
+			templateUrl: 'templates/crud-table-view.html',
 			controller: 'CrudCtrl'
 		})
 		.when('/users/create', {

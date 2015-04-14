@@ -160,9 +160,6 @@
 
 		function identity(x) { return x }
 
-		function ucFirst(str) {
-		    return str.charAt(0).toUpperCase() + str.substr(1);
-		}
 	}])
 
 
@@ -181,6 +178,10 @@
 		if (!singular)
 			console.warn('Warning: singular of "', plural, '" not found');
 		return singular ? singular : plural;
+	}
+
+	function ucFirst(str) {
+		return str.charAt(0).toUpperCase() + str.substr(1);
 	}
 
 })();
