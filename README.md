@@ -37,7 +37,7 @@ ToDo
     - Form buttons
       - ~~Create / Update~~
       - others?
-    - Table action buttons
+    - ~~CRUD table~~
   - Filters
     - ~~Singularize (to name a single item in collection)~~
 - Server

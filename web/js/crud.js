@@ -113,6 +113,9 @@
 	.directive('crudTable', function() {
 		return {
 			restrict: 'E',
+			link: function(scope, element, attrs) {
+				scope.collInfo = scope.crud[scope.collection];
+			},
 			templateUrl: 'templates/crud-table.html'
 		};
 	})
