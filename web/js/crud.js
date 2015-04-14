@@ -137,9 +137,14 @@
 		function completeMetadataDefaults(metadata) {
 			for (var collName in metadata)
 				if (metadata.hasOwnProperty(collName)) {
+					// Collection defaults
 					var collMeta = metadata[collName];
+					collMeta.collection = collName;
+					if (!collMeta.tableName) collMeta.tableName = ucFirst(collName);
+					if (!collMeta.itemName) collMeta.itemName = singularize(collName);
 					if (!collMeta.fieldOrder)
 						collMeta.fieldOrder = Object.keys(collMeta.fields);
+					// Field defaults
 					for (var i = 0; i < collMeta.fieldOrder.length; i++) {
 						completeFieldDefaults(collMeta.fields, collMeta.fieldOrder[i]);
 					}
