@@ -8,7 +8,7 @@
 		function($scope, $http, $route, $location) {
 		var paths = $route.current.originalPath.split('/');
 		$scope.collection = $route.current.collection || paths[1];
-		$scope.collInfo = $scope.crud[$scope.collection];
+		$scope.collInfo = $scope.crudMetadata[$scope.collection];
 		$scope.action = $route.current.action || paths[2] || 'read';
 		console.log('Collection:', $scope.collection, ' -  Action:', $scope.action);
 		switch ($scope.action) {
@@ -127,38 +127,17 @@
 
 	//------------------------- Services -------------------------
 
-	.factory('crudHelper', [function() {
-		return {
-			completeMetadataDefaults: completeMetadataDefaults
-		}
+	.provider('crud', function() {
+		this.$get = function() {
+			// Accessible via 'crud' injected parameter
+			return {
+				completeMetadataDefaults: completeMetadataDefaults
+			}
+		};
 
-		function completeMetadataDefaults(metadata) {
-			for (var collName in metadata)
-				if (metadata.hasOwnProperty(collName)) {
-					// Collection defaults
-					var collMeta = metadata[collName];
-					collMeta.collection = collName;
-					if (!collMeta.tableName) collMeta.tableName = ucFirst(collName);
-					if (!collMeta.itemName) collMeta.itemName = singularize(collName);
-					if (!collMeta.fieldOrder)
-						collMeta.fieldOrder = Object.keys(collMeta.fields);
-					// Field defaults
-					for (var i = 0; i < collMeta.fieldOrder.length; i++) {
-						completeFieldDefaults(collMeta.fields, collMeta.fieldOrder[i]);
-					}
-				}
-		}
-
-		function completeFieldDefaults(fields, name) {
-			var field = fields[name];
-			if (field.label === undefined) field.label = ucFirst(name);
-			if (field.colLabel === undefined) field.colLabel = field.label;
-			if (!field.cellRender) field.cellRender = identity;
-		}
-
-		function identity(x) { return x }
-
-	}])
+		// this.* is accessible via 'crudProvider' injected parameter
+		this.routesForCollection = routesForCollection;
+	})
 
 
 	//------------------------- Privates -------------------------
@@ -180,6 +159,48 @@
 
 	function ucFirst(str) {
 		return str.charAt(0).toUpperCase() + str.substr(1);
+	}
+
+	function completeMetadataDefaults(metadata) {
+		for (var collName in metadata)
+			if (metadata.hasOwnProperty(collName)) {
+				// Collection defaults
+				var collMeta = metadata[collName];
+				collMeta.collection = collName;
+				if (!collMeta.tableName) collMeta.tableName = ucFirst(collName);
+				if (!collMeta.itemName) collMeta.itemName = singularize(collName);
+				if (!collMeta.fieldOrder)
+					collMeta.fieldOrder = Object.keys(collMeta.fields);
+				// Field defaults
+				for (var i = 0; i < collMeta.fieldOrder.length; i++) {
+					completeFieldDefaults(collMeta.fields, collMeta.fieldOrder[i]);
+				}
+			}
+	}
+
+	function completeFieldDefaults(fields, name) {
+		var field = fields[name];
+		if (field.label === undefined) field.label = ucFirst(name);
+		if (field.colLabel === undefined) field.colLabel = field.label;
+		if (!field.cellRender) field.cellRender = identity;
+	}
+
+	function identity(x) { return x }
+
+	function routesForCollection($routeProvider, collection, ctrl) {
+		ctrl = ctrl || 'CrudCtrl';
+		$routeProvider.when('/' + collection, {
+			templateUrl: 'templates/crud-table-view.html',
+			controller: ctrl
+		})
+		.when('/' + collection + '/create', {
+			templateUrl: 'templates/crud-form-view.html',
+			controller: ctrl
+		})
+		.when('/' + collection + '/update/:id', {
+			templateUrl: 'templates/crud-form-view.html',
+			controller: ctrl
+		})
 	}
 
 })();

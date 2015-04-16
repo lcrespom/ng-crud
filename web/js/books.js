@@ -4,22 +4,10 @@
 		'ngRoute', 'ngSanitize', 'crud'
 	])
 
-	.config(['$routeProvider', function($routeProvider) {
+	.config(['$routeProvider', 'crudProvider', function($routeProvider, crudProvider) {
 		$routeProvider
 		.when('/', {
 			templateUrl: 'views/welcome.html'
-		})
-		.when('/users', {
-			templateUrl: 'templates/crud-table-view.html',
-			controller: 'CrudCtrl'
-		})
-		.when('/users/create', {
-			templateUrl: 'templates/crud-form-view.html',
-			controller: 'CrudCtrl'
-		})
-		.when('/users/update/:id', {
-			templateUrl: 'templates/crud-form-view.html',
-			controller: 'CrudCtrl'
 		})
 		.when('/combos', {
 			templateUrl: 'views/combos.html',
@@ -28,14 +16,16 @@
 		.otherwise({
 			redirectTo: '/'
 		});
+		crudProvider.routesForCollection($routeProvider, 'users');
 	}])
 
-	.controller('appCtrl', ['$scope', 'crudHelper', function($scope, crudHelper) {
-		crudHelper.completeMetadataDefaults(collectionMetadata);
-		$scope.crud = collectionMetadata;
+	.controller('appCtrl', ['$scope', 'crud', function($scope, crud) {
+		crud.completeMetadataDefaults(collectionMetadata);
+		$scope.crudMetadata = collectionMetadata;
 	}])
 
 	;
+
 
 	//------------------------- Collection metadata -------------------------
 
@@ -74,6 +64,13 @@
 			//TODO tableActions: {}
 			//TODO tableActionsPosition: left/right
 			//TODO focusField: 'name of field to set focus, defaults to first according to fieldOrder'
+		},
+
+		books: {
+			fields: {
+				title: {},
+				author: {}
+			}
 		}
 	}
 
