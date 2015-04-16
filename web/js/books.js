@@ -9,14 +9,11 @@
 		.when('/', {
 			templateUrl: 'views/welcome.html'
 		})
-		.when('/combos', {
-			templateUrl: 'views/combos.html',
-			controller: 'CrudCtrl'
-		})
 		.otherwise({
 			redirectTo: '/'
 		});
 		crudProvider.routesForCollection($routeProvider, 'users');
+		crudProvider.routesForCollection($routeProvider, 'books');
 	}])
 
 	.controller('appCtrl', ['$scope', 'crud', function($scope, crud) {
