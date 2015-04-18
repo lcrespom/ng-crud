@@ -59,6 +59,7 @@
 		$scope.prepareDelete = function(idx) {
 			$scope.toDelete = $scope.$parent.items[idx];
 		};
+
 	}])
 
 
@@ -116,6 +117,22 @@
 			templateUrl: 'templates/crud-table.html'
 		};
 	})
+
+	.directive('crudFormInput', ['$compile', function($compile) {
+		return {
+			restrict: 'E',
+			link: function(scope, element, attrs) {
+				var tag = scope.$eval('collInfo.fields[field]').inputType;
+				var html = '<' + tag + ' id="input-{{field}}" ' +
+					'label="{{collInfo.fields[field].label}}" ' +
+					'placeholder="{{collInfo.fields[field].placeholder}}" model="item[field]" ' +
+					'type="{{collInfo.fields[field].inputAttrs.type}}" ' +
+					'autofocus="{{ $first ? \'true\' : \'false\' }}"></' + tag + '>';
+				//TODO autofocus not working
+				element.append($compile(html)(scope));
+			}
+		}
+	}])
 
 
 	//------------------------- Filters -------------------------
@@ -183,6 +200,7 @@
 		if (field.label === undefined) field.label = ucFirst(name);
 		if (field.colLabel === undefined) field.colLabel = field.label;
 		if (!field.cellRender) field.cellRender = identity;
+		if (!field.inputType) field.inputType = 'crud-input';
 	}
 
 	function identity(x) { return x }

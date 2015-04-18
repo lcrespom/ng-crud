@@ -9,6 +9,10 @@
 		.when('/', {
 			templateUrl: 'views/welcome.html'
 		})
+		.when('/tests', {
+			templateUrl: 'views/tests.html',
+			controller: 'CrudCtrl'
+		})
 		.otherwise({
 			redirectTo: '/'
 		});
@@ -40,7 +44,7 @@
 					// colLabel: 'deafults to label'
 					// cellStyle: 'a CSS object as expected by ng-style'
 					// cellRender: 'a function that will render cell content - default to identity'
-					//TODO inputType: 'name of directive to use as form input - default to crud-input'
+					// inputType: 'name of directive to use as form input - default to crud-input'
 					// inputAttrs: object with extra attributes for input directive,
 					//		e.g. { type: 'email' }
 				},

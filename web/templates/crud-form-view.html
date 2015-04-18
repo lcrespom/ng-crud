@@ -4,11 +4,11 @@
 
 <form class="form-horizontal">
 	<div ng-repeat="field in collInfo.fieldOrder">
-		<crud-input id="input-{{field}}" label="{{collInfo.fields[field].label}}"
+		<crud-form-input id="input-{{field}}" label="{{collInfo.fields[field].label}}"
 			placeholder="{{collInfo.fields[field].placeholder}}" model="item[field]"
 			type="{{collInfo.fields[field].inputAttrs.type}}"
 			autofocus="{{ $first ? 'true' : 'false' }}">
-		</crud-input>
+		</crud-form-input>
 	</div>
 	<crud-form-buttons></crud-form-buttons>
 </form>
