@@ -78,8 +78,11 @@
 			},
 			link: function(scope, element, attrs) {
 				// Set focus if autofocus attribute is present
-				if (attrs.hasOwnProperty('autofocus') && attrs.autofocus != 'false')
-					element.find('input').focus();
+				if (attrs.hasOwnProperty('autofocus') && attrs.autofocus != 'false') {
+					var focusMe = element.find('input');
+					// setTimeout without time parameter defers to after DOM rendering
+					setTimeout(function() { focusMe.focus(); });
+				}
 				// Copy all extra attributes into the input element
 				for (var prop in attrs)
 					if (attrs.hasOwnProperty(prop) && prop[0]!='$' && !scope[prop])
@@ -128,7 +131,6 @@
 					'placeholder="{{collInfo.fields[field].placeholder}}" model="item[field]" ' +
 					'type="{{collInfo.fields[field].inputAttrs.type}}" ' +
 					'autofocus="{{ $first ? \'true\' : \'false\' }}"></' + tag + '>';
-				//TODO autofocus not working
 				element.append($compile(html)(scope));
 			}
 		}
