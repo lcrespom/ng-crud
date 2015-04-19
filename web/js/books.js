@@ -40,13 +40,16 @@
 				name: {
 					// label: 'Defaults to property name with ucFirst'
 					label: 'First name',
-					// placeholder: 'defaults to no placeholder displayed'
-					// colLabel: 'deafults to label'
-					// cellStyle: 'a CSS object as expected by ng-style'
-					// cellRender: 'a function that will render cell content - default to identity'
-					// inputType: 'name of directive to use as form input - default to crud-input'
+					//--- Form view attributes ---
+					// placeholder: defaults to no placeholder displayed
+					// cellRender: a function that will render cell content - default to identity
+					// inputType: name of directive to use as form input - default to crud-input
 					// inputAttrs: object with extra attributes for input directive,
 					//		e.g. { type: 'email' }
+					//--- Table view attributes ---
+					// colLabel: deafults to label
+					// cellStyle: a CSS object as expected by ng-style
+					// showInTable: defaults to true
 				},
 				surname: {
 					label: 'Last name'
@@ -70,7 +73,10 @@
 		books: {
 			fields: {
 				title: {},
-				author: {}
+				author: {},
+				synopsis: {
+					showInTable: false
+				}
 			}
 		}
 	}

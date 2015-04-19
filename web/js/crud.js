@@ -199,10 +199,13 @@
 
 	function completeFieldDefaults(fields, name) {
 		var field = fields[name];
+		// Form defaults
 		if (field.label === undefined) field.label = ucFirst(name);
+		if (!field.inputType) field.inputType = 'crud-input';
+		// Table defaults
 		if (field.colLabel === undefined) field.colLabel = field.label;
 		if (!field.cellRender) field.cellRender = identity;
-		if (!field.inputType) field.inputType = 'crud-input';
+		if (field.showInTable === undefined) field.showInTable = true;
 	}
 
 	function identity(x) { return x }

@@ -2,7 +2,7 @@
 	<thead>
 		<tr>
 			<th style="text-align: center; width: 170px">Action</th>
-			<th ng-repeat="field in collInfo.fieldOrder">
+			<th ng-repeat="field in collInfo.fieldOrder" ng-if="collInfo.fields[field].showInTable">
 				{{ collInfo.fields[field].colLabel }}
 			</th>
 		</tr>
@@ -23,7 +23,8 @@
 				</button>
 			</td>
 			<!-- Rest of columns -->
-			<td ng-repeat="field in collInfo.fieldOrder" ng-style="collInfo.fields[field].cellStyle"
+			<td ng-repeat="field in collInfo.fieldOrder" ng-if="collInfo.fields[field].showInTable"
+				ng-style="collInfo.fields[field].cellStyle"
 				ng-bind-html="collInfo.fields[field].cellRender(item[field])"></td>
 			</td>
 		</tr>
