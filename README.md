@@ -32,9 +32,10 @@ ToDo
       - ~~Input~~
       - Select
       - Checkbox
-      - Textarea
+      - ~~Textarea~~
       - Etc (radio...)
       - ~~Generic support for crudInput directives~~
+      - Avoid using id attribute in form elements (wrap input elements around label tags)
     - Form buttons
       - ~~Create / Update~~
       - others?

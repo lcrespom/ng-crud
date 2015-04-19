@@ -70,13 +70,9 @@
 			restrict: 'E',
 			scope: formInputScope,
 			link: formInputLink,
-			template:
-				'<div class="form-group">' +
-					'<label for="{{id}}-input" class="col-sm-2 control-label">{{label}}</label>' +
-					'<div class="col-sm-10">' +
-						'<input ng-model="model" class="form-control" id="{{id}}-input" placeholder="{{placeholder}}">' +
-					'</div>' +
-				'</div>'
+			template: formInputHeader +
+				'<input ng-model="model" class="form-control" id="{{id}}_input" placeholder="{{placeholder}}">' +
+				formInputFooter
 		};
 	})
 
@@ -85,14 +81,27 @@
 			restrict: 'E',
 			scope: formInputScope,
 			link: formInputLink,
-			template:
-				'<div class="form-group">' +
-					'<label for="{{id}}-input" class="col-sm-2 control-label">{{label}}</label>' +
-					'<div class="col-sm-10">' +
-						'<textarea ng-model="model" class="form-control" id="{{id}}-input" placeholder="{{placeholder}}">' +
-						'</textarea>' +
-					'</div>' +
-				'</div>'
+			template: formInputHeader +
+				'<textarea ng-model="model" class="form-control" id="{{id}}_textarea" placeholder="{{placeholder}}">' +
+				'</textarea>' +
+				formInputFooter
+			};
+	})
+
+	.directive('crudSelect', function() {
+		return {
+			restrict: 'E',
+			scope: formInputScope,
+			link: function(scope, element, attrs) {
+				formInputLink(scope, element, attrs);
+				var fieldMeta = scope.$parent.$eval('collInfo.fields[field]');
+				scope[attrs.id + '_listModel'] = fieldMeta.listModel;
+			},
+			template: formInputHeader +
+				'<select ng-model="model" class="form-control" id="{{id}}_select"' +
+					'ng-options="option.label for option in {{id}}_listModel">' +
+				'</select>' +
+				formInputFooter
 		};
 	})
 
@@ -126,7 +135,7 @@
 			link: function(scope, element, attrs) {
 				var fieldMeta = scope.$eval('collInfo.fields[field]');
 				var tag = fieldMeta.inputType;
-				var html = '<' + tag + ' id="input-{{field}}" ' +
+				var html = '<' + tag + ' id="crud_{{field}}" ' +
 					'label="{{collInfo.fields[field].label}}" ' +
 					'placeholder="{{collInfo.fields[field].placeholder}}" model="item[field]" ' +
 					'autofocus="{{ $first ? \'true\' : \'false\' }}"';
@@ -187,6 +196,14 @@
 			if (attrs.hasOwnProperty(prop) && prop[0]!='$' && !scope[prop])
 				inputElement.attr(prop, attrs[prop]);
 	};
+
+	var formInputHeader =
+		'<div class="form-group">' +
+			'<label for="{{id}}-input" class="col-sm-3 control-label">{{label}}</label>' +
+				'<div class="col-sm-9">';
+
+	var formInputFooter = '</div></div>';
+
 
 	function singularize(plural) {
 		plural = plural.toLowerCase();

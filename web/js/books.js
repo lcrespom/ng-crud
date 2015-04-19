@@ -46,6 +46,7 @@
 					// inputType: name of directive to use as form input - default to crud-input
 					// inputAttrs: object with extra attributes for input directive,
 					//		e.g. { type: 'email' }
+					// list-model: used when inputType is crud-select
 					//--- Table view attributes ---
 					// colLabel: deafults to label
 					// cellStyle: a CSS object as expected by ng-style
@@ -74,10 +75,19 @@
 			fields: {
 				title: {},
 				author: {},
+				genre: {
+					inputType: 'crud-select',
+					listModel: [
+						{ value: 'fantasy', label: 'Fantasy' },
+						{ value: 'scifi',   label: 'Science fiction' },
+						{ value: 'western', label: 'Western' },
+						{ value: 'mystery', label: 'Mystery' }
+					]	// alternatively, 'modelPropName' in scope
+				},
 				synopsis: {
 					showInTable: false,
 					inputType: 'crud-text-area',
-					inputAttrs: { rows: '5' }	//TODO this is ignored
+					inputAttrs: { rows: '5' }
 				}
 			}
 		}
