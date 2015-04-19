@@ -74,7 +74,7 @@
 				'<div class="form-group">' +
 					'<label for="{{id}}-input" class="col-sm-2 control-label">{{label}}</label>' +
 					'<div class="col-sm-10">' +
-						'<input ng-model="model" type="{{type}}" class="form-control" id="{{id}}-input" placeholder="{{placeholder}}">' +
+						'<input ng-model="model" class="form-control" id="{{id}}-input" placeholder="{{placeholder}}">' +
 					'</div>' +
 				'</div>'
 		};
@@ -170,7 +170,6 @@
 		label: '@',
 		placeholder: '@',
 		model: '=',
-		type: '@',
 		id: '@',
 		autofocus: '@'
 	};
