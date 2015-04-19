@@ -68,31 +68,30 @@
 	.directive('crudInput', function() {
 		return {
 			restrict: 'E',
-			scope: {
-				label: '@',
-				placeholder: '@',
-				model: '=',
-				type: '@',
-				id: '@',
-				autofocus: '@'
-			},
-			link: function(scope, element, attrs) {
-				// Set focus if autofocus attribute is present
-				if (attrs.hasOwnProperty('autofocus') && attrs.autofocus != 'false') {
-					var focusMe = element.find('input');
-					// setTimeout without time parameter defers to after DOM rendering
-					setTimeout(function() { focusMe.focus(); });
-				}
-				// Copy all extra attributes into the input element
-				for (var prop in attrs)
-					if (attrs.hasOwnProperty(prop) && prop[0]!='$' && !scope[prop])
-						element.find('input').attr(prop, attrs[prop]);
-			},
+			scope: formInputScope,
+			link: formInputLink,
 			template:
 				'<div class="form-group">' +
 					'<label for="{{id}}-input" class="col-sm-2 control-label">{{label}}</label>' +
 					'<div class="col-sm-10">' +
 						'<input ng-model="model" type="{{type}}" class="form-control" id="{{id}}-input" placeholder="{{placeholder}}">' +
+					'</div>' +
+				'</div>'
+		};
+	})
+
+	.directive('crudTextArea', function() {
+		//TODO support rows attribute specified in field metadata
+		return {
+			restrict: 'E',
+			scope: formInputScope,
+			link: formInputLink,
+			template:
+				'<div class="form-group">' +
+					'<label for="{{id}}-input" class="col-sm-2 control-label">{{label}}</label>' +
+					'<div class="col-sm-10">' +
+						'<textarea ng-model="model" rows="5" class="form-control" id="{{id}}-input" placeholder="{{placeholder}}">' +
+						'</textarea>' +
 					'</div>' +
 				'</div>'
 		};
@@ -121,6 +120,7 @@
 		};
 	})
 
+	// Super generic form input that compiles into the specific input as specified in field metadata
 	.directive('crudFormInput', ['$compile', function($compile) {
 		return {
 			restrict: 'E',
@@ -161,6 +161,28 @@
 
 	//------------------------- Privates -------------------------
 	;
+
+	var formInputScope = {
+		label: '@',
+		placeholder: '@',
+		model: '=',
+		type: '@',
+		id: '@',
+		autofocus: '@'
+	};
+
+	var formInputLink = function(scope, element, attrs) {
+		// Set focus if autofocus attribute is present
+		if (attrs.hasOwnProperty('autofocus') && attrs.autofocus != 'false') {
+			var focusMe = element.find('input');
+			// setTimeout without time parameter defers to after DOM rendering
+			setTimeout(function() { focusMe.focus(); });
+		}
+		// Copy all extra attributes into the input element
+		for (var prop in attrs)
+			if (attrs.hasOwnProperty(prop) && prop[0]!='$' && !scope[prop])
+				element.find('input').attr(prop, attrs[prop]);
+	};
 
 	function singularize(plural) {
 		plural = plural.toLowerCase();

@@ -75,7 +75,9 @@
 				title: {},
 				author: {},
 				synopsis: {
-					showInTable: false
+					showInTable: false,
+					inputType: 'crud-text-area',
+					inputAttrs: { rows: '5' }	//TODO this is ignored
 				}
 			}
 		}
