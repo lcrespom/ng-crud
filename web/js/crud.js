@@ -81,7 +81,6 @@
 	})
 
 	.directive('crudTextArea', function() {
-		//TODO support rows attribute specified in field metadata
 		return {
 			restrict: 'E',
 			scope: formInputScope,
@@ -90,7 +89,7 @@
 				'<div class="form-group">' +
 					'<label for="{{id}}-input" class="col-sm-2 control-label">{{label}}</label>' +
 					'<div class="col-sm-10">' +
-						'<textarea ng-model="model" rows="5" class="form-control" id="{{id}}-input" placeholder="{{placeholder}}">' +
+						'<textarea ng-model="model" class="form-control" id="{{id}}-input" placeholder="{{placeholder}}">' +
 						'</textarea>' +
 					'</div>' +
 				'</div>'
@@ -125,12 +124,17 @@
 		return {
 			restrict: 'E',
 			link: function(scope, element, attrs) {
-				var tag = scope.$eval('collInfo.fields[field]').inputType;
+				var fieldMeta = scope.$eval('collInfo.fields[field]');
+				var tag = fieldMeta.inputType;
 				var html = '<' + tag + ' id="input-{{field}}" ' +
 					'label="{{collInfo.fields[field].label}}" ' +
 					'placeholder="{{collInfo.fields[field].placeholder}}" model="item[field]" ' +
-					'type="{{collInfo.fields[field].inputAttrs.type}}" ' +
-					'autofocus="{{ $first ? \'true\' : \'false\' }}"></' + tag + '>';
+					'autofocus="{{ $first ? \'true\' : \'false\' }}"';
+				var inputAttrs = fieldMeta.inputAttrs;
+				for (var prop in inputAttrs)
+					if (inputAttrs.hasOwnProperty(prop))
+						html += ' ' + prop + '="' + inputAttrs[prop] + '"';
+				html += '></' + tag + '>';
 				element.append($compile(html)(scope));
 			}
 		}
@@ -172,16 +176,17 @@
 	};
 
 	var formInputLink = function(scope, element, attrs) {
+		// Warning: this line requires jQuery, otherwise a manual search would be required
+		var inputElement = element.find('.form-control');
 		// Set focus if autofocus attribute is present
 		if (attrs.hasOwnProperty('autofocus') && attrs.autofocus != 'false') {
-			var focusMe = element.find('input');
 			// setTimeout without time parameter defers to after DOM rendering
-			setTimeout(function() { focusMe.focus(); });
+			setTimeout(function() { inputElement.focus(); });
 		}
 		// Copy all extra attributes into the input element
 		for (var prop in attrs)
 			if (attrs.hasOwnProperty(prop) && prop[0]!='$' && !scope[prop])
-				element.find('input').attr(prop, attrs[prop]);
+				inputElement.attr(prop, attrs[prop]);
 	};
 
 	function singularize(plural) {
@@ -224,6 +229,7 @@
 		// Form defaults
 		if (field.label === undefined) field.label = ucFirst(name);
 		if (!field.inputType) field.inputType = 'crud-input';
+		if (!field.inputAttrs) field.inputAttrs = {};
 		// Table defaults
 		if (field.colLabel === undefined) field.colLabel = field.label;
 		if (!field.cellRender) field.cellRender = identity;
