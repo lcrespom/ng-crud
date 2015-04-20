@@ -33,9 +33,10 @@ ToDo
       - ~~Input~~
       - Select
       - Checkbox
-      - Textarea
+      - ~~Textarea~~
       - Etc (radio...)
-      - **Generic support for crudInput directives**
+      - ~~Generic support for crudInput directives~~
+      - Avoid using id attribute in form elements (wrap input elements around label tags)
     - Form buttons
       - ~~Create / Update~~
       - others?
@@ -44,6 +45,8 @@ ToDo
     - ~~Singularize (to name a single item in collection)~~
   - IE bugs
     - Browser cache is being used when sending JSON requests
+  - **Refactor everything!**
+    - See https://github.com/johnpapa/angular-styleguide
 - Server
   - Access control
     - Only allow access to specified collections, reject unspecified collections

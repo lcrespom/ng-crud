@@ -9,6 +9,10 @@
 		.when('/', {
 			templateUrl: 'views/welcome.html'
 		})
+		.when('/tests', {
+			templateUrl: 'views/tests.html',
+			controller: 'CrudCtrl'
+		})
 		.otherwise({
 			redirectTo: '/'
 		});
@@ -36,13 +40,17 @@
 				name: {
 					// label: 'Defaults to property name with ucFirst'
 					label: 'First name',
-					// placeholder: 'defaults to no placeholder displayed'
-					// colLabel: 'deafults to label'
-					// cellStyle: 'a CSS object as expected by ng-style'
-					// cellRender: 'a function that will render cell content - default to identity'
-					//TODO inputType: 'name of directive to use as form input - default to crud-input'
+					//--- Form view attributes ---
+					// placeholder: defaults to no placeholder displayed
+					// cellRender: a function that will render cell content - default to identity
+					// inputType: name of directive to use as form input - default to crud-input
 					// inputAttrs: object with extra attributes for input directive,
 					//		e.g. { type: 'email' }
+					// list-model: used when inputType is crud-select
+					//--- Table view attributes ---
+					// colLabel: deafults to label
+					// cellStyle: a CSS object as expected by ng-style
+					// showInTable: defaults to true
 				},
 				surname: {
 					label: 'Last name'
@@ -66,7 +74,21 @@
 		books: {
 			fields: {
 				title: {},
-				author: {}
+				author: {},
+				genre: {
+					inputType: 'crud-select',
+					listModel: [
+						{ value: 'fantasy', label: 'Fantasy' },
+						{ value: 'scifi',   label: 'Science fiction' },
+						{ value: 'western', label: 'Western' },
+						{ value: 'mystery', label: 'Mystery' }
+					]	//TODO alternatively, 'modelPropName' in scope
+				},
+				synopsis: {
+					showInTable: false,
+					inputType: 'crud-text-area',
+					inputAttrs: { rows: '5' }
+				}
 			}
 		}
 	}
