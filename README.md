@@ -24,6 +24,7 @@ ToDo
   	- ~~Update~~
   	- ~~Delete~~
   - Form validation
+  - Enter & Esc keys to confirm / cancel forms and dialogs
   - Improve feedback to user
     - Show 'loading...' when performing AJAX
     - Show error message upon AJAX error response
