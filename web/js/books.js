@@ -82,7 +82,7 @@
 						{ value: 'scifi',   label: 'Science fiction' },
 						{ value: 'western', label: 'Western' },
 						{ value: 'mystery', label: 'Mystery' }
-					]	// alternatively, 'modelPropName' in scope
+					]	//TODO alternatively, 'modelPropName' in scope
 				},
 				synopsis: {
 					showInTable: false,
