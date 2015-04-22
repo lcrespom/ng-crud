@@ -6,6 +6,7 @@
     "start": "node svr/svr",
     "test": "echo \"Error: no test specified\" && exit 1",
     "make": "node node_modules/coffee-script/bin/coffee make.coffee",
+    "watch": "node node_modules/watch/cli \"npm run make build\" src",
     "mongo": "..\\..\\mongodb-3.0.1\\bin\\mongod --dbpath ..\\..\\mongodb-3.0.1\\data",
     "mongo-mac": "~/devtools/mongodb/bin/mongod --dbpath ~/devtools/mongodb/data"
   },
@@ -25,7 +26,8 @@
     "coffee-script": "^1.9.1",
     "glob": "^5.0.5",
     "uglify-js": "^2.4.20",
-    "underscore": "^1.8.3"
+    "underscore": "^1.8.3",
+    "watch": "^0.16.0"
   },
   "dependencies": {
     "body-parser": "^1.12.2",

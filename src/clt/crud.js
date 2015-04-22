@@ -1,5 +1,4 @@
 (function() {
-
 	angular.module('crud', ['ngRoute'])
 
 	//------------------------- Controller -------------------------
