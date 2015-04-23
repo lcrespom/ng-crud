@@ -26,7 +26,6 @@
     "coffee-script": "^1.9.1",
     "glob": "^5.0.5",
     "uglify-js": "^2.4.20",
-    "underscore": "^1.8.3",
     "watch": "^0.16.0"
   },
   "dependencies": {
