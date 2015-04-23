@@ -1,7 +1,7 @@
 (function() {
 
 	angular.module('books', [
-		'ngRoute', 'ngSanitize', 'crud'
+		'ngRoute', 'crud'
 	])
 
 	.config(['$routeProvider', 'crudProvider', function($routeProvider, crudProvider) {
