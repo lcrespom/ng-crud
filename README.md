@@ -36,7 +36,6 @@ ToDo
       - ~~Textarea~~
       - Etc (radio...)
       - ~~Generic support for crudInput directives~~
-      - Avoid using id attribute in form elements (wrap input elements around label tags)
     - Form buttons
       - ~~Create / Update~~
       - others?
@@ -47,6 +46,10 @@ ToDo
     - Browser cache is being used when sending JSON requests
   - Apply best practices as described in https://github.com/johnpapa/angular-styleguide
     (to a reasonable extent)
+  - Use JSON schema
+    - To define metadata (or at least part of it)
+    - To apply validation rules when editing a form
+
 - Server
   - Access control
     - Only allow access to specified collections, reject unspecified collections

@@ -22,6 +22,7 @@
 		completeMetadataDefaults(collectionMetadata);
 		$scope._crud = $scope._crud || {};
 		$scope._crud.metaData = collectionMetadata;
+		$scope._crud.idCount = $scope._crud.idCount || 0;
 	}
 
 	function completeMetadataDefaults(metadata) {

@@ -9,7 +9,7 @@
 			scope: formInputScope,
 			link: formInputLink,
 			template: formInputHeader +
-				'<input ng-model="model" class="form-control" id="{{id}}_input" placeholder="{{placeholder}}">' +
+				'<input ng-model="model" class="form-control" id="{{fullId}}" placeholder="{{placeholder}}">' +
 				formInputFooter
 		};
 	})
@@ -20,7 +20,7 @@
 			scope: formInputScope,
 			link: formInputLink,
 			template: formInputHeader +
-				'<textarea ng-model="model" class="form-control" id="{{id}}_textarea" placeholder="{{placeholder}}">' +
+				'<textarea ng-model="model" class="form-control" id="{{fullId}}" placeholder="{{placeholder}}">' +
 				'</textarea>' +
 				formInputFooter
 			};
@@ -36,7 +36,7 @@
 				scope[attrs.id + '_listModel'] = fieldMeta.listModel;
 			},
 			template: formInputHeader +
-				'<select ng-model="model" class="form-control" id="{{id}}_select"' +
+				'<select ng-model="model" class="form-control" id="{{fullId}}" ' +
 					'ng-options="option.label for option in {{id}}_listModel">' +
 				'</select>' +
 				formInputFooter
@@ -96,7 +96,8 @@
 		placeholder: '@',
 		model: '=',
 		id: '@',
-		autofocus: '@'
+		autofocus: '@',
+		fullId: '@'
 	};
 
 	var formInputLink = function(scope, element, attrs) {
@@ -111,11 +112,12 @@
 		for (var prop in attrs)
 			if (attrs.hasOwnProperty(prop) && prop[0]!='$' && !scope[prop])
 				inputElement.attr(prop, attrs[prop]);
+		scope.fullId = scope.id + '_' + scope.$parent._crud.idCount++;
 	};
 
 	var formInputHeader =
 		'<div class="form-group">' +
-			'<label for="{{id}}-input" class="col-sm-3 control-label">{{label}}</label>' +
+			'<label for="{{fullId}}" class="col-sm-3 control-label">{{label}}</label>' +
 				'<div class="col-sm-9">';
 
 	var formInputFooter = '</div></div>';
