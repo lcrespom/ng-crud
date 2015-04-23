@@ -32,7 +32,7 @@
 			scope: formInputScope,
 			link: function(scope, element, attrs) {
 				formInputLink(scope, element, attrs);
-				var fieldMeta = scope.$parent.$eval('collInfo.fields[field]');
+				var fieldMeta = scope.$parent.$eval('_crud.collectionMeta.fields[field]');
 				scope[attrs.id + '_listModel'] = fieldMeta.listModel;
 			},
 			template: formInputHeader +
@@ -71,11 +71,11 @@
 		return {
 			restrict: 'E',
 			link: function(scope, element, attrs) {
-				var fieldMeta = scope.$eval('collInfo.fields[field]');
+				var fieldMeta = scope.$eval('_crud.collectionMeta.fields[field]');
 				var tag = fieldMeta.inputType;
 				var html = '<' + tag + ' id="crud_{{field}}" ' +
-					'label="{{collInfo.fields[field].label}}" ' +
-					'placeholder="{{collInfo.fields[field].placeholder}}" model="item[field]" ' +
+					'label="{{_crud.collectionMeta.fields[field].label}}" ' +
+					'placeholder="{{_crud.collectionMeta.fields[field].placeholder}}" model="item[field]" ' +
 					'autofocus="{{ $first ? \'true\' : \'false\' }}"';
 				var inputAttrs = fieldMeta.inputAttrs;
 				for (var prop in inputAttrs)

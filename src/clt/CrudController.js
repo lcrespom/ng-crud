@@ -6,7 +6,7 @@
 		var paths = $route.current.originalPath.split('/');
 		// Get collection name and store it in scope._crud.collectionName
 		$scope._crud.collectionName = $route.current.collection || paths[1];
-		$scope.collInfo = $scope._crud.metaData[$scope._crud.collectionName];
+		$scope._crud.collectionMeta = $scope._crud.metaData[$scope._crud.collectionName];
 		$scope._crud.action = $route.current.action || paths[2] || 'read';
 		console.log('Collection:', $scope._crud.collectionName, ' -  Action:', $scope._crud.action);
 		switch ($scope._crud.action) {

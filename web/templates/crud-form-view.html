@@ -3,10 +3,10 @@
 </h2>
 
 <form class="form-horizontal">
-	<div ng-repeat="field in collInfo.fieldOrder">
-		<crud-form-input id="input-{{field}}" label="{{collInfo.fields[field].label}}"
-			placeholder="{{collInfo.fields[field].placeholder}}" model="item[field]"
-			type="{{collInfo.fields[field].inputAttrs.type}}"
+	<div ng-repeat="field in _crud.collectionMeta.fieldOrder">
+		<crud-form-input id="input-{{field}}" label="{{_crud.collectionMeta.fields[field].label}}"
+			placeholder="{{_crud.collectionMeta.fields[field].placeholder}}" model="item[field]"
+			type="{{_crud.collectionMeta.fields[field].inputAttrs.type}}"
 			autofocus="{{ $first ? 'true' : 'false' }}">
 		</crud-form-input>
 	</div>
