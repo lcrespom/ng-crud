@@ -21,8 +21,7 @@
 	}])
 
 	.controller('appCtrl', ['$scope', 'crud', function($scope, crud) {
-		crud.completeMetadataDefaults(collectionMetadata);
-		$scope.crudMetadata = collectionMetadata;
+		crud.setMetaData($scope, collectionMetadata);
 	}])
 
 	;

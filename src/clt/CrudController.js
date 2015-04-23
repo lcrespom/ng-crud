@@ -4,16 +4,17 @@
 	.controller('CrudCtrl', ['$scope', '$http', '$route', '$location',
 		function($scope, $http, $route, $location) {
 		var paths = $route.current.originalPath.split('/');
-		$scope.collection = $route.current.collection || paths[1];
-		$scope.collInfo = $scope.crudMetadata[$scope.collection];
-		$scope.action = $route.current.action || paths[2] || 'read';
-		console.log('Collection:', $scope.collection, ' -  Action:', $scope.action);
-		switch ($scope.action) {
+		// Get collection name and store it in scope._crud.collectionName
+		$scope._crud.collectionName = $route.current.collection || paths[1];
+		$scope.collInfo = $scope._crud.metaData[$scope._crud.collectionName];
+		$scope._crud.action = $route.current.action || paths[2] || 'read';
+		console.log('Collection:', $scope._crud.collectionName, ' -  Action:', $scope._crud.action);
+		switch ($scope._crud.action) {
 			case 'create':
 				$scope.item = {};
 				break;
 			case 'read':
-				$http.get('/data/' + $scope.collection)
+				$http.get('/data/' + $scope._crud.collectionName)
 				.success(function(data) {
 					$scope.$parent.items = data.items;
 				});
@@ -22,15 +23,15 @@
 				$scope.item = $scope.$parent.items[$route.current.params.id];
 				break;
 			default:
-				throw new Error('Invalid action: ' + $scope.action);
+				throw new Error('Invalid action: ' + $scope._crud.action);
 		}
 
 		function httpAction(verb, item, extraPath) {
 			extraPath = extraPath || '';
-			return $http[verb]('/data/' + $scope.collection + extraPath, item)
+			return $http[verb]('/data/' + $scope._crud.collectionName + extraPath, item)
 			.success(function(data) {
 				console.log(verb.toUpperCase() + ' OK: ', data);
-				$location.path($scope.collection);
+				$location.path($scope._crud.collectionName);
 			})
 			.error(function(data, status, headers, config) {
 				//TODO report error to end user
@@ -39,7 +40,7 @@
 		}
 
 		$scope.doSubmit = function() {
-			var verb = $scope.action == 'create' ? 'post' : 'put';
+			var verb = $scope._crud.action == 'create' ? 'post' : 'put';
 			httpAction(verb, $scope.item);
 		};
 

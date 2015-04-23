@@ -5,7 +5,7 @@
 		this.$get = function() {
 			// Accessible via 'crud' injected parameter
 			return {
-				completeMetadataDefaults: completeMetadataDefaults,
+				setMetaData: setMetaData,
 				singularize: singularize
 			}
 		};
@@ -17,6 +17,12 @@
 
 	//------------------------- Privates -------------------------
 	;
+
+	function setMetaData($scope, collectionMetadata) {
+		completeMetadataDefaults(collectionMetadata);
+		$scope._crud = $scope._crud || {};
+		$scope._crud.metaData = collectionMetadata;
+	}
 
 	function completeMetadataDefaults(metadata) {
 		for (var collName in metadata)

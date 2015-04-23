@@ -53,7 +53,7 @@
 							"{{ action == 'create' ? 'Create' : 'Update' }}" +
 						'</button>' +
 						'&nbsp;' +
-						'<a href="#/{{collection}}" class="btn btn-default">Cancel</a>' +
+						'<a href="#/{{_crud.collectionName}}" class="btn btn-default">Cancel</a>' +
 					'</div>' +
 				'</div>'
 		};
