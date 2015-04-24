@@ -31,7 +31,7 @@ ToDo
   - Angular components for most common web elements
     - Form inputs
       - ~~Input~~
-      - Select
+      - ~~Select~~
       - Checkbox
       - ~~Textarea~~
       - Etc (radio...)

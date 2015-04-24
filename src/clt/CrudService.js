@@ -51,8 +51,8 @@
 		// Table defaults
 		if (field.colLabel === undefined) field.colLabel = field.label;
 		if (!field.cellRender) {
-			if (field.inputType == 'crud-select')
-				field.cellRender = selectCellRender;
+			if (field.listModel)
+				field.cellRender = selectCellRender(field.listModel);
 			else
 				field.cellRender = defaultCellRender;
 		}
@@ -60,7 +60,15 @@
 	}
 
 	function defaultCellRender(x) { return x ? x.toString() : ''; }
-	function selectCellRender(x)  { return x ? x.label      : ''; }
+
+	function selectCellRender(listModel) {
+		return function(value) {
+			if (!value) return '';
+			for (var i = 0; i < listModel.length; i++)
+				if (value == listModel[i].value) return listModel[i].label;
+			return '';
+		}
+	}
 
 	function ucFirst(str) {
 		return str.charAt(0).toUpperCase() + str.substr(1);
