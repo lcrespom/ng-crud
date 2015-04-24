@@ -1,2 +1,4 @@
 node_modules/
 npm-debug.log
+web/js/crud.js.map
+web/js/crud.min.js
