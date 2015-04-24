@@ -23,8 +23,8 @@ doClean = (ctrl) ->
 
 doUglify = (ctrl) ->
 	ctrl.log('Minifying...')
-	moduleJS = glob.sync("src/clt/*.module.js")
-	otherJS = glob.sync("src/clt/*.js")
+	moduleJS = glob.sync("src/clt/**/*.module.js")
+	otherJS = glob.sync("src/clt/**/*.js")
 	sources = _.union(moduleJS, otherJS).join(' ')
 	cmd = commands.uglify(sources, 'web/js/crud.min.js', 'web/js/crud.js.map', 'crud.js.map')
 	ctrl.log('Running command: ' + cmd)
