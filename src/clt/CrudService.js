@@ -50,11 +50,17 @@
 		if (!field.inputAttrs) field.inputAttrs = {};
 		// Table defaults
 		if (field.colLabel === undefined) field.colLabel = field.label;
-		if (!field.cellRender) field.cellRender = identity;
+		if (!field.cellRender) {
+			if (field.inputType == 'crud-select')
+				field.cellRender = selectCellRender;
+			else
+				field.cellRender = defaultCellRender;
+		}
 		if (field.showInTable === undefined) field.showInTable = true;
 	}
 
-	function identity(x) { return x }
+	function defaultCellRender(x) { return x ? x.toString() : ''; }
+	function selectCellRender(x)  { return x ? x.label      : ''; }
 
 	function ucFirst(str) {
 		return str.charAt(0).toUpperCase() + str.substr(1);

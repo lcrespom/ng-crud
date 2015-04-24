@@ -37,7 +37,7 @@
 			},
 			template: formInputHeader +
 				'<select ng-model="model" class="form-control" id="{{fullId}}" ' +
-					'ng-options="option.label for option in {{id}}_listModel">' +
+					'ng-options="option.label for option in {{id}}_listModel track by option.value">' +
 				'</select>' +
 				formInputFooter
 		};

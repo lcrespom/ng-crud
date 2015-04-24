@@ -2,11 +2,12 @@ chalk = require('chalk')
 
 taskInfo = null
 
-serialize = (taskList) ->
+serialize = (taskList, successCB) ->
 	runTaskFromList = (ctrl, i) ->
 		task = taskList[i]
 		if not task
 			ctrl.success("Task sequence #{taskNames} completed successfully", true)
+			successCB?()
 			return
 		runTask(task, ->
 			runTaskFromList(ctrl, i+1)
@@ -35,16 +36,30 @@ runTask = (task, successCB) ->
 	if !taskImpl
 		taskControl.fail("Error: task '#{task}' not found")
 	else if taskImpl.constructor == Array
-		taskImpl = serialize(taskImpl)
+		taskImpl = serialize(taskImpl, successCB)
 	else if taskImpl.constructor != Function
 		taskControl.fail("Task '#{task}' is invalid")
 	if successCB then taskControl.successCB = successCB
 	taskControl.start(task)
 	taskImpl(taskControl, task, process.argv[3..])
 
+reportTime = (t0, t1) ->
+	elapsed = t1 - t0
+	secs = parseInt(elapsed / 1000)
+	mins = parseInt(secs / 60)
+	msg = 'Total time: '
+	msg += '' + mins + 'm ' if mins
+	msg += '' + (secs % 60) + 's ' if secs
+	msg += '' + (elapsed % 1000) + 'ms'
+	console.log(chalk.cyan.bold(msg))
+
 module.exports = (tasks) ->
+	t0 = new Date().getTime()
 	taskInfo = tasks
 	task = process.argv[2]
 	if !task
 		throw('Missing task')
-	runTask(task)
+	runTask(task, ->
+		t1 = new Date().getTime()
+		reportTime(t0, t1)
+	)

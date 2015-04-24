@@ -57,25 +57,24 @@
 			$scope.toDelete = $scope.$parent.items[idx];
 		};
 
+
+		function httpAction(verb, item, extraPath) {
+			extraPath = extraPath || '';
+			return $http[verb]('/data/' + $scope._crud.collectionName + extraPath, item)
+			.success(function(data) {
+				console.log(verb.toUpperCase() + ' OK: ', data);
+				$location.path($scope._crud.collectionName);
+			})
+			.error(function(data, status, headers, config) {
+				//TODO report error to end user
+				console.error(verb.toUpperCase() + ' Error: ', data, status, headers, config);
+			});
+		}
+
 	}])
 
 
-	//------------------------- Privates -------------------------
 	;
-
-	function httpAction(verb, item, extraPath) {
-		extraPath = extraPath || '';
-		return $http[verb]('/data/' + $scope._crud.collectionName + extraPath, item)
-		.success(function(data) {
-			console.log(verb.toUpperCase() + ' OK: ', data);
-			$location.path($scope._crud.collectionName);
-		})
-		.error(function(data, status, headers, config) {
-			//TODO report error to end user
-			console.error(verb.toUpperCase() + ' Error: ', data, status, headers, config);
-		});
-	}
-
 
 
 })();
