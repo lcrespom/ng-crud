@@ -49,6 +49,13 @@ ToDo
   - Use JSON schema
     - To define metadata (or at least part of it)
     - To apply validation rules when editing a form
+  - Search form
+    - Search button unfolds search form
+    - Search data filters table query
+    - Buttons: Search / clear / close
+  - Custom table action buttons
+    - Provide custom directive for rendering custom table buttons
+  - Sortable table (by clicking on column headers)
 
 - Server
   - Access control
@@ -58,3 +65,4 @@ ToDo
       - To reject invalid properties in request
       - To filter unspecified properties in response
       - To validate input data
+
