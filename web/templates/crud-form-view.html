@@ -2,7 +2,7 @@
 	{{ action == 'create' ? 'New' : 'Update' }} {{ _crud.collectionName | singular }}
 </h2>
 
-<form class="form-horizontal">
+<form class="form-horizontal" ng-keyup="$event.keyCode!=27 || navigateTo(_crud.collectionName)">
 	<div ng-repeat="field in _crud.collectionMeta.fieldOrder">
 		<crud-form-input></crud-form-input>
 	</div>

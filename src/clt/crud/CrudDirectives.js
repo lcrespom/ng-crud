@@ -49,7 +49,7 @@
 			template:
 				'<div class="form-group">' +
 					'<div class="col-sm-12 text-center">' +
-						'<button type="button" class="btn btn-primary" ng-click="doSubmit()">' +
+						'<button type="submit" class="btn btn-primary" ng-click="doSubmit()">' +
 							"{{ action == 'create' ? 'Create' : 'Update' }}" +
 						'</button>' +
 						'&nbsp;' +

@@ -49,7 +49,9 @@
 					//--- Table view attributes ---
 					// colLabel: deafults to label
 					// cellStyle: a CSS object as expected by ng-style
+					//TODO cellClass: an optional class to apply to the cell
 					// showInTable: defaults to true
+					//TODO colWidth: optional column width
 				},
 				surname: {
 					label: 'Last name'

@@ -1,13 +1,43 @@
 <!-- Title and "New" button -->
 <h2 style="display: inline">{{ _crud.collectionMeta.tableName }}</h2>
 <span style="float: right">
+  <button id="search_button" class="btn btn-info" type="button"
+  	ng-click="togglePanel('search_button', 'search_panel')">
+    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+    Search
+    <span class="caret"></span>
+  </button>
 	<a href="#{{ _crud.collectionMeta.collection }}/create" class="btn btn-primary">
 		<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
 		New
 	</a>
 </span>
 
+
 <div style="height: 20px"></div>
+
+
+<!-- Search Panel -->
+<div style="display: none" id="search_panel">
+	<form class="form-horizontal">
+		<fieldset>
+			<legend>Search</legend>
+			<div ng-repeat="field in _crud.collectionMeta.fieldOrder">
+				<crud-form-input></crud-form-input>
+			</div>
+		</fieldset>
+		<div class="form-group">
+			<div class="col-sm-12 text-center">
+				<button type="submit" class="btn btn-info" ng-click="doSearch()">
+				    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+    				Search
+				</button>
+			</div>
+		</div>
+	</form>
+	<hr>
+</div>
+
 
 <!-- Table displaying all items -->
 <crud-table></crud-table>
@@ -28,7 +58,7 @@
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-danger" data-dismiss="modal"
-				ng-click="doDelete('confirm-delete')">
+				ng-click="doDelete('confirm-delete')" autofocus>
 					<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
 					Delete
 				</button>

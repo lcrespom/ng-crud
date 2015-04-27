@@ -53,8 +53,25 @@
 
 		// Stores the item to be deleted
 		// Invoked by the "delete" action button in the table
-		$scope.prepareDelete = function(idx) {
+		$scope.prepareDelete = function(idx, id) {
 			$scope.toDelete = $scope.$parent.items[idx];
+			// If dialog id is passed, focus is set
+			if (id) setTimeout(function() {
+				$('#' + id).find('[autofocus]').focus();
+			}, 400);
+		};
+
+		$scope.togglePanel = function(buttonId, panelId) {
+			$('#' + buttonId).toggleClass('dropup');
+			$('#' + panelId).slideToggle();
+		};
+
+		$scope.navigateTo = function(hash) {
+			$location.path(hash);
+		};
+
+		$scope.doSearch = function() {
+			console.log('TODO: search');
 		};
 
 
