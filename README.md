@@ -46,6 +46,7 @@ ToDo
     - Browser cache is being used when sending JSON requests
   - Apply best practices as described in https://github.com/johnpapa/angular-styleguide
     (to a reasonable extent)
+  - Introduce ES6 in the make cycle
   - Use JSON schema
     - To define metadata (or at least part of it)
     - To apply validation rules when editing a form
