@@ -15,6 +15,21 @@ Ingredients:
   - Bootstrap
 
 
+Setup:
+------
+- Requirements
+  - Node.js: https://nodejs.org/
+  - MongoDB: https://www.mongodb.org/
+- Install
+  - Clone repository: `$ git clone https://github.com/lcrespom/ng-crud.git`
+  - Get dependencies: `npm install`
+  - Build: `npm run make build`
+- Run
+  - Start MongoDB (check out the mongo and mongo-mac scripts in `package.json` as examples)
+  - Start server: `npm start`
+  - Open browser at http://localhost:1337
+
+
 ToDo
 ----
 - Browser
