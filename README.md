@@ -2,8 +2,8 @@ ng-crud
 =======
 Angular-based CRUD
 
-Ingredients:
-------------
+Ingredients
+-----------
 - Server
   - node.js
   - Connect as server engine
@@ -15,8 +15,8 @@ Ingredients:
   - Bootstrap
 
 
-Setup:
-------
+Setup
+-----
 - Requirements
   - Node.js: https://nodejs.org/
   - MongoDB: https://www.mongodb.org/
